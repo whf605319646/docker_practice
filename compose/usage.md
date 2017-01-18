@@ -13,14 +13,14 @@
 
 创建一个 `compose-haproxy-web` 目录，作为项目工作目录，并在其中分别创建两个子目录：`haproxy` 和 `web`。
 
-### Web 子目录
+### web 子目录
 
 这里用 Python 程序来提供一个简单的 HTTP 服务，打印出访问者的 IP 和 实际的本地 IP。
 
 #### index.py
 
 编写一个 `index.py` 作为服务器文件，代码为
-```sh
+```bash
 #!/usr/bin/python
 #authors: yeasy.github.com
 #date: 2013-07-05
@@ -93,13 +93,13 @@ if __name__ == '__main__':
 
 #### index.html
 生成一个临时的 `index.html` 文件，其内容会被 index.py 更新。
-```sh
+```bash
 $ touch index.html
 ```
 
 #### Dockerfile
 生成一个 Dockerfile，内容为
-```sh
+```bash
 FROM python:2.7
 WORKDIR /code
 ADD . /code
@@ -109,7 +109,7 @@ CMD python index.py
 
 ### haproxy 目录
 在其中生成一个 `haproxy.cfg` 文件，内容为
-```sh
+```bash
 global
   log 127.0.0.1 local0
   log 127.0.0.1 local1 notice
@@ -123,7 +123,8 @@ defaults
   timeout client 50000ms
   timeout server 50000ms
 
-listen stats :70
+listen stats
+    bind 0.0.0.0:70
     stats enable
     stats uri /
 
@@ -145,7 +146,7 @@ backend web_backends
 ### docker-compose.yml
 编写 docker-compose.yml 文件，这个是 Compose 使用的主模板文件。内容十分简单，指定 3 个 web 容器，以及 1 个 haproxy 容器。
 
-```sh
+```bash
 weba:
     build: ./web
     expose:
@@ -180,7 +181,7 @@ haproxy:
 
 ### 运行 compose 项目
 现在 compose-haproxy-web 目录长成下面的样子。
-```sh
+```bash
 compose-haproxy-web
 ├── docker-compose.yml
 ├── haproxy

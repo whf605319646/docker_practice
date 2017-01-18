@@ -5,18 +5,18 @@ Marathon 是可以跟 Mesos 一起协作的一个 framework，用来运行持久
 ### 安装
 一共需要安装四种组件，mesos-master、marathon、zookeeper 需要安装到所有的主节点，mseos-slave 需要安装到从节点。
 
-mesos 利用 zookper 来进行主节点的同步，以及从节点发现主节点的过程。
+mesos 利用 zookeeper 来进行主节点的同步，以及从节点发现主节点的过程。
 
 #### 源码编译
 
 下载源码
-```sh
+```bash
 git clone https://git-wip-us.apache.org/repos/asf/mesos.git
 ```
 
 安装依赖
 
-```sh
+```bash
 #jdk-7
 sudo apt-get update && sudo apt-get install -y openjdk-7-jdk
 #autotools
@@ -26,7 +26,7 @@ sudo apt-get -y install build-essential python-dev python-boto libcurl4-nss-dev 
 ```
 
 编译&安装
-```sh
+```bash
 $ cd mesos
 
 # Bootstrap (Only required if building from git repository).
@@ -43,7 +43,7 @@ $ make check && make install
 
 安装 Docker，不再赘述，可以参考 [这里](http://yeasy.gitbooks.io/docker_practice/content/install/index.html)。
 
-```sh
+```bash
 # Setup
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 DISTRO=$(lsb_release -is | tr '[:upper:]' '[:lower:]')
@@ -66,12 +66,12 @@ sudo apt-get -y update && sudo apt-get -y install zookeeper mesos marathon
 其中 mesos-master 镜像将作为 master 和 slave 容器使用。
 
 导出本地机器的地址到环境变量。
-```sh
+```bash
 HOST_IP=10.11.31.7
 ```
 
 启动 Zookeepr 容器。
-```sh
+```bash
 docker run -d \
 -p 2181:2181 \
 -p 2888:2888 \
@@ -80,7 +80,7 @@ garland/zookeeper
 ```
 
 启动 Mesos Master 容器。
-```sh
+```bash
 docker run --net="host" \
 -p 5050:5050 \
 -e "MESOS_HOSTNAME=${HOST_IP}" \
@@ -96,7 +96,7 @@ garland/mesosphere-docker-mesos-master
 ```
 
 启动 Marathon。
-```sh
+```bash
 docker run \
 -d \
 -p 8080:8080 \
@@ -104,7 +104,7 @@ garland/mesosphere-docker-marathon --master zk://${HOST_IP}:2181/mesos --zk zk:/
 ```
 
 启动 Mesos slave 容器。
-```sh
+```bash
 docker run -d \
 --name mesos_slave_1 \
 --entrypoint="mesos-slave" \
@@ -128,7 +128,7 @@ ZooKeepr 是一个分布式应用的协调工具，用来管理多个 Master 节
 首先，要修改 myid，手动为每一个节点分配一个自己的 id（1-255之间）。
 
 zoo.cfg 是主配置文件，主要修改如下的三行（如果你启动三个 zk 节点）。
-```sh
+```bash
 server.1=zookeeper1:2888:3888
 server.2=zookeeper2:2888:3888
 server.3=zookeeper3:2888:3888
@@ -148,7 +148,7 @@ Mesos 的默认配置目录分别为：
 
 ###### 主节点
 首先在所有节点上修改 /etc/mesos/zk，为 主节点的 zookeeper 地址列表，例如：
-```sh
+```bash
 zk://ip1:2181,ip2:2181/mesos
 ```
 创建 /etc/mesos-master/ip 文件，写入主节点监听的地址。
@@ -156,7 +156,7 @@ zk://ip1:2181,ip2:2181/mesos
 还可以创建 /etc/mesos-master/cluster 文件，写入集群的别名。
 
 之后，启动服务：
-```sh
+```bash
 sudo service mesos-master start
 ```
 更多选项可以参考[这里](http://open.mesosphere.com/reference/mesos-master/)。
@@ -166,7 +166,7 @@ sudo service mesos-master start
 在从节点上，修改 /etc/mesos-slave/ip 文件，写入跟主节点通信的地址。
 
 之后，启动服务。
-```sh
+```bash
 sudo service mesos-slave start
 ```
 
@@ -178,7 +178,7 @@ sudo service mesos-slave start
 
 #### Marathon
 启动 marathon 服务。
-```sh
+```bash
 sudo service marathon start
 ```
 
