@@ -20,7 +20,7 @@ sha256:f477a6e18e989839d25223f301ef738b69621c4877600ae6467c4e5289822a79B/78.42 M
 
 这条命令自动下载了 `ubuntu-14.04-x86_64-minimal.tar.gz` 文件，并且作为根文件系统展开导入，并保存为镜像 `openvz/ubuntu:14.04`。
 
-导入成功后，我们可以用 `docker ps` 看到这个导入的镜像：
+导入成功后，我们可以用 `docker images` 看到这个导入的镜像：
 
 ```bash
 $ docker images openvz/ubuntu
@@ -38,7 +38,7 @@ f477a6e18e98        About a minute ago                       214.9 MB           
 
 ### `docker save` 和 `docker load`
 
-Docker 还提供了 `docker load` 和 `docker save` 命令，用以将镜像保存为一个 `tar` 文件，然后传输到另一个位置上，在加载进来。这是在没有 Docker Registry 时的做法，现在已经不推荐，镜像迁移应该直接使用 Docker Registry，无论是直接使用 Docker Hub 还是使用内网私有 Registry 都可以。
+Docker 还提供了 `docker load` 和 `docker save` 命令，用以将镜像保存为一个 `tar` 文件，然后传输到另一个位置上，再加载进来。这是在没有 Docker Registry 时的做法，现在已经不推荐，镜像迁移应该直接使用 Docker Registry，无论是直接使用 Docker Hub 还是使用内网私有 Registry 都可以。
 
 #### 保存镜像
 

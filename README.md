@@ -1,6 +1,6 @@
 # Docker — 从入门到实践
 
-0.8.1
+0.8.2
 
 [Docker](http://www.docker.com) 是个划时代的开源项目，它彻底释放了计算虚拟化的威力，极大提高了应用的运行效率，降低了云计算资源供应的成本！ 使用 Docker，可以让应用的部署、测试和分发都变得前所未有的高效和轻松！
 
@@ -33,14 +33,12 @@ Docker 自身仍在快速发展中，生态环境也在蓬勃成长。欢迎参�
 * QQ 群 X   （可加）：366203473
 
 ## 进阶学习
-![Docker 技术入门与实战](_images/docker_primer.png)
+![Docker 技术入门与实战](_images/docker_primer2.png)
 
-《[Docker 技术入门与实战](http://item.jd.com/11598400.html)》一书已经正式出版，包含大量第一手实战案例和更为深入的技术剖析，欢迎大家阅读使用并反馈建议。
+《[Docker 技术入门与实战](http://item.jd.com/12121728.html)》第二版已经正式出版，针对初版进行内容升级，欢迎大家阅读使用并反馈建议。
 
-* [China-Pub](http://product.china-pub.com/3770833)
-* [京东图书](http://item.jd.com/11598400.html)
-* [当当图书](http://product.dangdang.com/23620853.html)
-* [亚马逊图书](http://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B00R5MYI7C/ref=lh_ni_t?ie=UTF8&psc=1&smid=A1AJ19PSB66TGU)
+* [京东图书](https://item.jd.com/12121728.html)
+* [China-Pub](http://product.china-pub.com/5089907)
 
 ## 鼓励项目
 
